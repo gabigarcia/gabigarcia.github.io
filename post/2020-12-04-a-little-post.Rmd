@@ -1,0 +1,37 @@
+---
+title: A Little Post
+author: Gabi
+date: '2020-12-04'
+slug: a-little-post
+categories: []
+tags: []
+description: ''
+---
+#Here's a cute little post
+
+Just playing around with code
+
+##Examples
+
+R
+```{r}
+hist(quakes$depth)
+```
+
+
+python
+```{python}
+string= "Hello world!"
+
+print(string,string)
+```
+
+##Now here's some links
+
+[Link to project 1](projects/project1/)
+
+[Link to google](https://www.google.com)
+
+##Now a GIF
+![](/post/2020-12-04-a-little-post_files/major.png)
+

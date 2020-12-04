@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Gabi Garcia" />
+    
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/favicon.ico">
+    <title>Project 1: Exploratory Data Analysis</title>
+    <meta name="generator" content="Hugo 0.79.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="../../"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="../../post/">BLOG</a></li>
+        
+        <li><a href="../../projects/">PROJECTS</a></li>
+        
+        <li><a href="../../resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="../../project/project1/">Project 1: Exploratory Data Analysis</a></strong>
+          </h3>
+        </div>
+ 
+<div class="blog-title">
+          <h4>
+         January 1, 0001 
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+<link href="../../rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+<script src="../../rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="../../rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="../../rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/datatables-binding/datatables.js"></script>
+<link href="../../rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="../../rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
+<link href="../../rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<script src="../../rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="../../rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<link href="../../rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="../../rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<div id="gabriela-garica-gg27447" class="section level2">
+<h2>Gabriela Garica GG27447</h2>
+</div>
+<div id="data-wrangling-and-data-exploration" class="section level2">
+<h2>Data Wrangling and Data Exploration</h2>
+<div id="instructions" class="section level3">
+<h3>Instructions</h3>
+<p>A knitted R Markdown document (ideally HTML) and the raw R Markdown file (as .Rmd) should both be submitted to Canvas by 11:59pm on 10/11/2020. These two documents will be graded jointly, so they must be consistent (i.e., don’t change the R Markdown file without also updating the knitted document).</p>
+<p>The text of the document should provide a narrative structure around your code/output. All results presented must have corresponding code. Any answers/results/plots etc. given without the corresponding R code that generated the result will not be considered. Furthermore, all code contained in your final project document must work correctly (knit early, knit often)! Please do not include any extraneous code or code which produces error messages. (Code that produces warnings is acceptable, as long as you understand what the warnings mean!)</p>
+</div>
+<div id="find-data" class="section level3">
+<h3>Find data:</h3>
+<p>Find two (!) datasets with one variable in common (e.g., dates, times, states, counties, countries, sports players), both with at least 50 observations (i.e., rows) in each. Please think very carefully about whether it makes sense to combine your datasets! If you find one dataset with 50 patients and it has their age, and you find another dataset with 50 <em>different</em> patients that has their ages, it makes no sense to join them based on age (you would just be pairing up random people of the same age).</p>
+<p>When combined, the resulting/final dataset must have <strong>at least 4 different variables (at least 3 numeric) in addition to the common variable</strong> (i.e., five variables total).</p>
+<p>You can have as many variables as you would like! If you found two datasets that you like but they don't have enough variables, find a third dataset with the same common variable and join all three.</p>
+</div>
+<div id="guidelines" class="section level3">
+<h3>Guidelines</h3>
+<ol style="list-style-type: decimal">
+<li><p>If the datasets are not tidy, you will need to reshape them so that every observation has its own row and every variable its own column. If the datasets are both already tidy, you will make them untidy with <code>pivot_wider()/spread()</code> and then tidy them again with <code>pivot_longer/gather()</code> to demonstrate your use of the functions. It's fine to wait until you have your descriptives to use these functions (e.g., you might want to pivot_wider() to rearrange the data to make your descriptive statistics easier to look at); it's fine long as you use them at least once!</p>
+<ul>
+<li><p>Depending on your datasets, it might be a good idea to do this before joining. For example, if you have a dataset you like with multiple measurements per year, but you want to join by year, you could average over your numeric variables to get means/year, do counts for your categoricals to get a counts/year, etc.</p></li>
+<li><p>If your data sets are already tidy, demonstrate the use of <code>pivot_longer()/gather()</code> and <code>pivot_wider()/spread()</code> on all or part of your data at some point in this document (e.g., after you have generated summary statistics in part 3, make a table of them wide instead of long).</p></li>
+</ul></li>
+<li><p>Join your 2+ separate data sources into a single dataset based on a common ID variable! If you can't find a good pair datasets to join, you may split one main dataset into two different datasets with a common ID variable in each, and then join them back together based on that common ID, but this is obviously less than ideal.</p>
+<ul>
+<li>You will document the type of join that you do (left/right/inner/full), including a discussion of how many observations were in each dataset, which observations in each dataset were dropped (if any) and why you chose this particular join.</li>
+</ul></li>
+<li><p>Create summary statistics</p>
+<ul>
+<li><p>Use <em>all six</em> core <code>dplyr</code> functions (<code>filter, select, arrange, group_by, mutate, summarize</code>) to manipulate and explore your dataset. For mutate, create a new variable that is a function of at least one other variable, preferably using a dplyr vector function (see dplyr cheatsheet). It's totally fine to use the <code>_if</code>, <code>_at</code>, <code>_all</code> versions of mutate/summarize instead (indeed, it is encouraged if you have lots of variables)</p></li>
+<li><p>Create summary statistics (<code>mean, sd, var, n, quantile, min, max, n_distinct, cor</code>, etc) for each of your numeric variables both overall and after grouping by one of your categorical variables (either together or one-at-a-time; if you have two categorical variables, try to include at least one statistic based on a grouping of two categorical variables simultaneously). If you do not have any categorical variables, create one using mutate (e.g., with <code>case_when</code> or <code>ifelse</code>) to satisfy the <code>group_by</code> requirements above. Ideally, you will find a way to show these summary statistics in an easy-to-read table (e.g., by reshaping). (You might explore the kable package for making pretty tables!) If you have lots of numeric variables (e.g., 10+), or your categorical variables have too many categories, just pick a few (either numeric variables or categories of a categorical variable) and summarize based on those. It would be a good idea to show a correlation matrix for your numeric variables (you will need it to make one of your plots).</p></li>
+</ul></li>
+<li><p>Make visualizations (three plots)</p>
+<ul>
+<li>Make a correlation heatmap of your numeric variables</li>
+<li>Create at least two additional plots of your choice with ggplot that highlight some of the more interesting features of your data.</li>
+<li>Each plot (besides the heatmap) should have at least three variables mapped to separate aesthetics</li>
+<li>Each should use different geoms (don't do two geom_bars)</li>
+<li>At least one plot should include <code>stat=&quot;summary&quot;</code></li>
+<li>Each plot should include a supporting paragraph describing the relationships that are being visualized and any trends that are apparent
+<ul>
+<li>It is fine to include more, but limit yourself to 4. Plots should avoid being redundant! Four bad plots will get a lower grade than two good plots, all else being equal.</li>
+</ul></li>
+<li>Make them pretty! Use correct labels, etc.</li>
+</ul></li>
+<li><p>Perform k-means/PAM clustering or PCA on (at least) your numeric variables.</p>
+<ul>
+<li><p>Include all steps as we discuss in class, including a visualization.</p></li>
+<li><p>If you don't have at least 3 numeric variables, or you want to cluster based on categorical variables too, convert them to factors in R, generate Gower's dissimilarity matrix on the data, and do PAM clustering on the dissimilarities.</p></li>
+<li><p>Show how you chose the final number of clusters/principal components</p></li>
+<li><p>Interpret the final clusters/principal components</p></li>
+<li><p>For every step, document what your code does (in words) and what you see in the data!</p></li>
+</ul></li>
+</ol>
+<P style="page-break-before: always">
+
+</div>
+<div id="rubric" class="section level3">
+<h3>Rubric</h3>
+<p>Prerequisite: Finding appropriate data from at least two sources per the instructions above: Failure to do this will result in a 0! You will submit a .Rmd file and a knitted document (pdf).</p>
+<div id="introduction-4-pts" class="section level4">
+<h4>0. Introduction (4 pts)</h4>
+<ul>
+<li>Write a narrative introductory paragraph or two describing the datasets you have chosen, the variables they contain, how they were acquired, and why they are interesting to you. Expand on potential associations you may expect, if any.</li>
+</ul>
+<p><em>I have chosen data that gives average SAT and ACT scores for each state and the data that gives the number of breweries per state.I picked my data from github after I verified they both had numeric varibles and both had US states as a category. The 2018 SAT data has the state, ACT particpation, mean ACT composit scores, SAT participation, mean SAT math scores, mean SAT reading and writing scores, and the mean SAT total scores. The brewrie data consists of state, year, total barrels brewed, and type of production, which includes On Premises, Bottles and Cans, and Kegs and Barrels. This data intrests me because I want to see if there is a correlation between the amount of beer brewed and SAT scores. I expect that states with high production of beer to have high SAT scores since if there is more business done in that state, there may be more money put into SAT preperation for students. </em></p>
+</div>
+<div id="tidying-rearranging-widelong-8-pts" class="section level4">
+<h4>1. Tidying: Rearranging Wide/Long (8 pts)</h4>
+<ul>
+<li>Tidy the datasets (using the <code>tidyr</code> functions <code>pivot_longer</code>/<code>gather</code> and/or <code>pivot_wider</code>/<code>spread</code>)</li>
+<li>If you data sets are already tidy, be sure to use those functions somewhere else in your project</li>
+<li>Document the process (describe in words what was done per the instructions)</li>
+</ul>
+<pre class="r"><code>library(tidyverse)
+beer_states &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-03-31/beer_states.csv&quot;)
+glimpse(beer_states)</code></pre>
+<pre><code>## Rows: 1,872
+## Columns: 4
+## $ state   &lt;chr&gt; &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;AK&quot;, &quot;…
+## $ year    &lt;dbl&gt; 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2…
+## $ barrels &lt;dbl&gt; 2067.69, 2263.65, 1929.15, 2251.02, 2312.43, 2155.60, 2114.97…
+## $ type    &lt;chr&gt; &quot;On Premises&quot;, &quot;On Premises&quot;, &quot;On Premises&quot;, &quot;On Premises&quot;, &quot;…</code></pre>
+<pre class="r"><code>SAT &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/irinhwng/SAT-Participation-Rates/master/datasets/combined_2018.csv&quot;)
+glimpse(SAT)</code></pre>
+<pre><code>## Rows: 51
+## Columns: 7
+## $ state_2018             &lt;chr&gt; &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Arizona&quot;, &quot;Arkansas&quot;, &quot;C…
+## $ act_participation_2018 &lt;dbl&gt; 100, 33, 66, 100, 27, 30, 26, 17, 32, 66, 53, …
+## $ act_composite_2018     &lt;dbl&gt; 19.1, 20.8, 19.2, 19.4, 22.7, 23.9, 25.6, 23.8…
+## $ sat_participation_2018 &lt;dbl&gt; 6, 43, 29, 5, 60, 100, 100, 100, 92, 56, 70, 5…
+## $ sat_read_write_2018    &lt;dbl&gt; 595, 562, 577, 592, 540, 519, 535, 505, 497, 5…
+## $ sat_math_2018          &lt;dbl&gt; 571, 544, 572, 576, 536, 506, 519, 492, 480, 5…
+## $ sat_total_2018         &lt;dbl&gt; 1166, 1106, 1149, 1169, 1076, 1025, 1053, 998,…</code></pre>
+<p><em>I opened the tidyverse package and called the data from github with the read_csv command and the data URL. After this I saved them as beer_states and SAT. I did not have to tidy the data since it is already tidy with distinct variables for each relevent row. I will tidy the data further by filtering for relevent data after I merge the tables to ensure I do not drop rows prematurely.</em></p>
+</div>
+<div id="joiningmerging-8-pts" class="section level4">
+<h4>2. Joining/Merging (8 pts)</h4>
+<ul>
+<li>Join your datasets into one using a <code>dplyr</code> join function</li>
+<li>If you have multiple observations on the joining variable in either dataset, fix this by collapsing via summarize</li>
+<li>Discuss the process in words, including why you chose the join you did</li>
+<li>Discuss which cases were dropped, if any, and potential problems with this</li>
+</ul>
+<pre class="r"><code>P1names &lt;- bind_cols(stabb = state.abb, stname = state.name)
+p1fix &lt;- full_join(SAT, P1names, by = c(state_2018 = &quot;stname&quot;))
+p1dat &lt;- left_join(p1fix, beer_states, by = c(stabb = &quot;state&quot;))
+p1data &lt;- p1dat %&gt;% select(-stabb) %&gt;% filter(year == 2018)
+p1data %&gt;% summarise_all(function(x) sum(is.na(x)))</code></pre>
+<pre><code>## # A tibble: 1 x 10
+##   state_2018 act_participati… act_composite_2… sat_participati… sat_read_write_…
+##        &lt;int&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt;            &lt;int&gt;
+## 1          0                0                0                0                0
+## # … with 5 more variables: sat_math_2018 &lt;int&gt;, sat_total_2018 &lt;int&gt;,
+## #   year &lt;int&gt;, barrels &lt;int&gt;, type &lt;int&gt;</code></pre>
+<pre class="r"><code>glimpse(p1data)</code></pre>
+<pre><code>## Rows: 150
+## Columns: 10
+## $ state_2018             &lt;chr&gt; &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Al…
+## $ act_participation_2018 &lt;dbl&gt; 100, 100, 100, 33, 33, 33, 66, 66, 66, 100, 10…
+## $ act_composite_2018     &lt;dbl&gt; 19.1, 19.1, 19.1, 20.8, 20.8, 20.8, 19.2, 19.2…
+## $ sat_participation_2018 &lt;dbl&gt; 6, 6, 6, 43, 43, 43, 29, 29, 29, 5, 5, 5, 60, …
+## $ sat_read_write_2018    &lt;dbl&gt; 595, 595, 595, 562, 562, 562, 577, 577, 577, 5…
+## $ sat_math_2018          &lt;dbl&gt; 571, 571, 571, 544, 544, 544, 572, 572, 572, 5…
+## $ sat_total_2018         &lt;dbl&gt; 1166, 1166, 1166, 1106, 1106, 1106, 1149, 1149…
+## $ year                   &lt;dbl&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018…
+## $ barrels                &lt;dbl&gt; 41718.66, 14241.33, 9873.67, 30620.23, 100038.…
+## $ type                   &lt;chr&gt; &quot;On Premises&quot;, &quot;Bottles and Cans&quot;, &quot;Kegs and B…</code></pre>
+<p><em>Since SAT has the states spelled out and beer_states has them abbreviated, I used the built in state.name and state.abb data sets to create a common variable between them with bind_cols.After this I did a full join with SAT data with 51 rows and the state data with 50 rows, then I did the full join to add the beer_states data with 1872 rows into the new SAT dataset with 1872 rows total. After this I created a condensed version with select() to remove the abbreviations completely from the dataset and then I filtered for the year 2018 to match the SAT data. After this six cases were dropped since I filtered out Washington DC since I am only looking for states, and the total beer brewed since it accounts for DC's production. In the end the data contains 150 rows where each state has three entries to account for type of production. No NAs were automatically dropped since there were values for each state after I filtered for relevent data.</em></p>
+</div>
+<div id="wrangling-40-pts" class="section level4">
+<h4>3. Wrangling (40 pts)</h4>
+<ul>
+<li>Use all six core <code>dplyr</code> functions in the service of generating summary statistics (18 pts)
+<ul>
+<li>Use mutate at least once to generate a variable that is a function of at least one other variable</li>
+</ul></li>
+<li>Compute at least 10 summary statistics for using summarize and summarize with group_by (18 pts)
+<ul>
+<li>Use at least 5 unique functions inside of summarize (e.g., mean, sd)</li>
+<li>At least 2 of these should group by a categorical variable. Create one by dichotomizing a numeric if necessary</li>
+<li>If applicable, at least 1 of these should group by two categorical variables</li>
+<li>Strongly encouraged to create a correlation matrix with <code>cor()</code> on your numeric variables</li>
+</ul></li>
+<li>Summarize/discuss all results in no more than two paragraphs (4 pts)</li>
+</ul>
+<pre class="r"><code>library(DT)
+
+p1data %&gt;% group_by(state_2018) %&gt;% summarize(Avg_Brls = mean(barrels), 
+    Std_Dev_Brls = sd(barrels), Med_Brls = median(barrels), Qnt_Brls = quantile(barrels), 
+    Total_Brls = sum(barrels)) %&gt;% arrange(desc(Qnt_Brls)) %&gt;% 
+    datatable</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250"],["Texas","Colorado","Ohio","California","Georgia","Virginia","Missouri","Florida","Wisconsin","California","Texas","Colorado","Ohio","New York","Georgia","Virginia","Missouri","Florida","Wisconsin","Pennsylvania","New York","New Jersey","New Hampshire","Pennsylvania","California","Tennessee","Colorado","New Jersey","New Hampshire","Ohio","Virginia","Florida","Illinois","California","Texas","Wisconsin","Oregon","North Carolina","Pennsylvania","Tennessee","Michigan","Colorado","Missouri","Ohio","Illinois","Oregon","Virginia","Florida","Michigan","North Carolina","Texas","Wisconsin","Pennsylvania","New York","Georgia","Minnesota","Oregon","Missouri","New Jersey","California","Michigan","North Carolina","Minnesota","New Hampshire","New York","Oregon","Georgia","Michigan","North Carolina","Massachusetts","Washington","Maryland","Illinois","Delaware","New Jersey","Washington","Massachusetts","Vermont","North Carolina","Illinois","Colorado","Washington","New Hampshire","Texas","Massachusetts","Minnesota","Washington","Maryland","Delaware","Florida","Illinois","Kentucky","Vermont","Michigan","Oregon","Washington","Minnesota","Virginia","Connecticut","New York","Utah","Massachusetts","Alaska","Ohio","Louisiana","Maine","Maine","Minnesota","Connecticut","Maine","Alaska","Utah","Kentucky","Pennsylvania","Iowa","Louisiana","Arizona","Wisconsin","Maryland","Delaware","Indiana","Vermont","Maine","Arizona","Montana","Alaska","Indiana","New Jersey","Massachusetts","Tennessee","Arizona","Indiana","Tennessee","Tennessee","Montana","Indiana","Arizona","Georgia","Utah","Maryland","Connecticut","Maine","Indiana","Louisiana","New Mexico","Arizona","Alaska","Montana","Vermont","New Mexico","Iowa","Montana","Alabama","Delaware","Montana","Connecticut","New Hampshire","South Carolina","New Mexico","Louisiana","Hawaii","Hawaii","Hawaii","Rhode Island","Missouri","Utah","Alaska","Maryland","New Mexico","South Carolina","Kentucky","Kentucky","Alabama","Kentucky","Connecticut","Arkansas","Louisiana","Nebraska","Rhode Island","Hawaii","New Mexico","Vermont","South Carolina","Nebraska","South Carolina","Nevada","Oklahoma","Wyoming","Wyoming","Rhode Island","Rhode Island","Rhode Island","Wyoming","Idaho","Idaho","South Carolina","Nevada","Idaho","Alabama","Delaware","Idaho","Arkansas","Wyoming","Nebraska","Idaho","Kansas","Nevada","Nevada","Nevada","Nebraska","Alabama","Hawaii","Nebraska","Wyoming","Mississippi","Iowa","Utah","Alabama","Iowa","Kansas","Iowa","Oklahoma","South Dakota","Mississippi","West Virginia","Mississippi","North Dakota","Kansas","Kansas","Kansas","South Dakota","West Virginia","Mississippi","Mississippi","North Dakota","West Virginia","South Dakota","Arkansas","West Virginia","Arkansas","Arkansas","South Dakota","Oklahoma","South Dakota","Oklahoma","North Dakota","North Dakota","North Dakota","Oklahoma","West Virginia"],[6073107.02666667,6077500.75,5886856.79666667,6178882.96,4726131.82,4574828.55,4241007.45666667,3765075.15333333,3448243.74333333,6178882.96,6073107.02666667,6077500.75,5886856.79666667,2669282.42666667,4726131.82,4574828.55,4241007.45666667,3765075.15333333,3448243.74333333,1703484.59,2669282.42666667,1067203.63,970880.6,1703484.59,6178882.96,620715.143333333,6077500.75,1067203.63,970880.6,5886856.79666667,4574828.55,3765075.15333333,521045.653333333,6178882.96,6073107.02666667,3448243.74333333,505524.996666667,471587.556666667,1703484.59,620715.143333333,462447.756666667,6077500.75,4241007.45666667,5886856.79666667,521045.653333333,505524.996666667,4574828.55,3765075.15333333,462447.756666667,471587.556666667,6073107.02666667,3448243.74333333,1703484.59,2669282.42666667,4726131.82,226652.88,505524.996666667,4241007.45666667,1067203.63,6178882.96,462447.756666667,471587.556666667,226652.88,970880.6,2669282.42666667,505524.996666667,4726131.82,462447.756666667,471587.556666667,148525.37,172862.233333333,107454.633333333,521045.653333333,99649.6466666667,1067203.63,172862.233333333,148525.37,91257.64,471587.556666667,521045.653333333,6077500.75,172862.233333333,970880.6,6073107.02666667,148525.37,226652.88,172862.233333333,107454.633333333,99649.6466666667,3765075.15333333,521045.653333333,61994.9933333333,91257.64,462447.756666667,505524.996666667,172862.233333333,226652.88,4574828.55,64699.9166666667,2669282.42666667,57401.96,148525.37,64527.1066666667,5886856.79666667,56871.0266666667,76803.49,76803.49,226652.88,64699.9166666667,76803.49,64527.1066666667,57401.96,61994.9933333333,1703484.59,31491.0866666667,56871.0266666667,58587.7133333333,3448243.74333333,107454.633333333,99649.6466666667,57791.4966666667,91257.64,76803.49,58587.7133333333,49573.6533333333,64527.1066666667,57791.4966666667,1067203.63,148525.37,620715.143333333,58587.7133333333,57791.4966666667,620715.143333333,620715.143333333,49573.6533333333,57791.4966666667,58587.7133333333,4726131.82,57401.96,107454.633333333,64699.9166666667,76803.49,57791.4966666667,56871.0266666667,35727.14,58587.7133333333,64527.1066666667,49573.6533333333,91257.64,35727.14,31491.0866666667,49573.6533333333,21944.5533333333,99649.6466666667,49573.6533333333,64699.9166666667,970880.6,24091.0733333333,35727.14,56871.0266666667,27105.8833333333,27105.8833333333,27105.8833333333,21191,4241007.45666667,57401.96,64527.1066666667,107454.633333333,35727.14,24091.0733333333,61994.9933333333,61994.9933333333,21944.5533333333,61994.9933333333,64699.9166666667,9480.84333333333,56871.0266666667,16105.3533333333,21191,27105.8833333333,35727.14,91257.64,24091.0733333333,16105.3533333333,24091.0733333333,13862.9266666667,6019.28,14386.23,14386.23,21191,21191,21191,14386.23,14247.6266666667,14247.6266666667,24091.0733333333,13862.9266666667,14247.6266666667,21944.5533333333,99649.6466666667,14247.6266666667,9480.84333333333,14386.23,16105.3533333333,14247.6266666667,8492.99333333333,13862.9266666667,13862.9266666667,13862.9266666667,16105.3533333333,21944.5533333333,27105.8833333333,16105.3533333333,14386.23,6972.60333333333,31491.0866666667,57401.96,21944.5533333333,31491.0866666667,8492.99333333333,31491.0866666667,6019.28,4034.86,6972.60333333333,3517.30333333333,6972.60333333333,2421.73666666667,8492.99333333333,8492.99333333333,8492.99333333333,4034.86,3517.30333333333,6972.60333333333,6972.60333333333,2421.73666666667,3517.30333333333,4034.86,9480.84333333333,3517.30333333333,9480.84333333333,9480.84333333333,4034.86,6019.28,4034.86,6019.28,2421.73666666667,2421.73666666667,2421.73666666667,6019.28,3517.30333333333],[9463151.26931633,9017329.26226255,8954946.97975661,8653224.39477805,7744769.62156228,6743907.05158565,6667146.26679385,5378549.40336253,5026803.83422711,8653224.39477805,9463151.26931633,9017329.26226255,8954946.97975661,4125545.43246513,7744769.62156228,6743907.05158565,6667146.26679385,5378549.40336253,5026803.83422711,2138579.7075515,4125545.43246513,1483655.83328494,1398601.11620941,2138579.7075515,8653224.39477805,978843.308047256,9017329.26226255,1483655.83328494,1398601.11620941,8954946.97975661,6743907.05158565,5378549.40336253,597733.688526708,8653224.39477805,9463151.26931633,5026803.83422711,443163.354653349,405658.317476985,2138579.7075515,978843.308047256,398137.943350721,9017329.26226255,6667146.26679385,8954946.97975661,597733.688526708,443163.354653349,6743907.05158565,5378549.40336253,398137.943350721,405658.317476985,9463151.26931633,5026803.83422711,2138579.7075515,4125545.43246513,7744769.62156228,189758.809063055,443163.354653349,6667146.26679385,1483655.83328494,8653224.39477805,398137.943350721,405658.317476985,189758.809063055,1398601.11620941,4125545.43246513,443163.354653349,7744769.62156228,398137.943350721,405658.317476985,88251.1376470564,50242.1129962767,100490.276861279,597733.688526708,105207.358392926,1483655.83328494,50242.1129962767,88251.1376470564,86275.8630824931,405658.317476985,597733.688526708,9017329.26226255,50242.1129962767,1398601.11620941,9463151.26931633,88251.1376470564,189758.809063055,50242.1129962767,100490.276861279,105207.358392926,5378549.40336253,597733.688526708,58622.1968167369,86275.8630824931,398137.943350721,443163.354653349,50242.1129962767,189758.809063055,6743907.05158565,46845.4597580111,4125545.43246513,50614.5864760022,88251.1376470564,34737.1737327957,8954946.97975661,37238.171422851,24502.2380796469,24502.2380796469,189758.809063055,46845.4597580111,24502.2380796469,34737.1737327957,50614.5864760022,58622.1968167369,2138579.7075515,37611.9162639267,37238.171422851,12530.6775974898,5026803.83422711,100490.276861279,105207.358392926,9481.12679224012,86275.8630824931,24502.2380796469,12530.6775974898,12278.6118717766,34737.1737327957,9481.12679224012,1483655.83328494,88251.1376470564,978843.308047256,12530.6775974898,9481.12679224012,978843.308047256,978843.308047256,12278.6118717766,9481.12679224012,12530.6775974898,7744769.62156228,50614.5864760022,100490.276861279,46845.4597580111,24502.2380796469,9481.12679224012,37238.171422851,13600.611803283,12530.6775974898,34737.1737327957,12278.6118717766,86275.8630824931,13600.611803283,37611.9162639267,12278.6118717766,17263.5623298737,105207.358392926,12278.6118717766,46845.4597580111,1398601.11620941,12348.7247267333,13600.611803283,37238.171422851,13050.4847830122,13050.4847830122,13050.4847830122,9593.2044356878,6667146.26679385,50614.5864760022,34737.1737327957,100490.276861279,13600.611803283,12348.7247267333,58622.1968167369,58622.1968167369,17263.5623298737,58622.1968167369,46845.4597580111,13570.3046957846,37238.171422851,6889.24349616366,9593.2044356878,13050.4847830122,13600.611803283,86275.8630824931,12348.7247267333,6889.24349616366,12348.7247267333,2652.39553532902,9436.14968305929,2910.27146398751,2910.27146398751,9593.2044356878,9593.2044356878,9593.2044356878,2910.27146398751,1212.89791047447,1212.89791047447,12348.7247267333,2652.39553532902,1212.89791047447,17263.5623298737,105207.358392926,1212.89791047447,13570.3046957846,2910.27146398751,6889.24349616366,1212.89791047447,3481.91749021043,2652.39553532902,2652.39553532902,2652.39553532902,6889.24349616366,17263.5623298737,13050.4847830122,6889.24349616366,2910.27146398751,3401.36331073782,37611.9162639267,50614.5864760022,17263.5623298737,37611.9162639267,3481.91749021043,37611.9162639267,9436.14968305929,4297.02182346099,3401.36331073782,3621.78549263113,3401.36331073782,3725.54069445407,3481.91749021043,3481.91749021043,3481.91749021043,4297.02182346099,3621.78549263113,3401.36331073782,3401.36331073782,3725.54069445407,3621.78549263113,4297.02182346099,13570.3046957846,3621.78549263113,13570.3046957846,13570.3046957846,4297.02182346099,9436.14968305929,4297.02182346099,9436.14968305929,3725.54069445407,3725.54069445407,3725.54069445407,9436.14968305929,3621.78549263113],[1069103.27,1598523.94,1359048.25,2054263.98,460632.48,1272328.62,763851.31,1211791.38,1047608.3,2054263.98,1069103.27,1598523.94,1359048.25,466871,460632.48,1272328.62,763851.31,1211791.38,1047608.3,905758.65,466871,370889.34,295253.52,905758.65,2054263.98,57029.15,1598523.94,370889.34,295253.52,1359048.25,1272328.62,1211791.38,219382.35,2054263.98,1069103.27,1047608.3,404151.01,298636.47,905758.65,57029.15,359017.74,1598523.94,763851.31,1359048.25,219382.35,404151.01,1272328.62,1211791.38,359017.74,298636.47,1069103.27,1047608.3,905758.65,466871,460632.48,152641.92,404151.01,763851.31,370889.34,2054263.98,359017.74,298636.47,152641.92,295253.52,466871,404151.01,460632.48,359017.74,298636.47,154797.7,174684.94,70807.06,219382.35,68113.87,370889.34,174684.94,154797.7,66620.54,298636.47,219382.35,1598523.94,174684.94,295253.52,1069103.27,154797.7,152641.92,174684.94,70807.06,68113.87,1211791.38,219382.35,28653.06,66620.54,359017.74,404151.01,174684.94,152641.92,1272328.62,50128.49,466871,51234.23,154797.7,62922.15,1359048.25,48367.7,83500.42,83500.42,152641.92,50128.49,83500.42,62922.15,51234.23,28653.06,905758.65,10200.98,48367.7,56861.38,1047608.3,70807.06,68113.87,56023.45,66620.54,83500.42,56861.38,44290.04,62922.15,56023.45,370889.34,154797.7,57029.15,56861.38,56023.45,57029.15,57029.15,44290.04,56023.45,56861.38,460632.48,51234.23,70807.06,50128.49,83500.42,56023.45,48367.7,37733.8,56861.38,62922.15,44290.04,66620.54,37733.8,10200.98,44290.04,14241.33,68113.87,44290.04,50128.49,295253.52,19482.87,37733.8,48367.7,34458.29,34458.29,34458.29,15674.07,763851.31,51234.23,62922.15,70807.06,37733.8,19482.87,28653.06,28653.06,14241.33,28653.06,50128.49,1668.5,48367.7,13114.23,15674.07,34458.29,37733.8,66620.54,19482.87,13114.23,19482.87,12423.11,968.47,15298.08,15298.08,15674.07,15674.07,15674.07,15298.08,14567.03,14567.03,19482.87,12423.11,14567.03,14241.33,68113.87,14567.03,1668.5,15298.08,13114.23,14567.03,6626.39,12423.11,12423.11,12423.11,13114.23,14241.33,34458.29,13114.23,15298.08,6788.76,10200.98,51234.23,14241.33,10200.98,6626.39,10200.98,968.47,2298.83,6788.76,3278.68,6788.76,299.88,6626.39,6626.39,6626.39,2298.83,3278.68,6788.76,6788.76,299.88,3278.68,2298.83,1668.5,3278.68,1668.5,1668.5,2298.83,968.47,2298.83,968.47,299.88,299.88,299.88,968.47,3278.68],[16987670.45,16457400.82,16201555.3,16122748.84,13665906.76,12333484.1,11927936.41,9944711.04,9225292.71,9088506.41,9028386.86,9027962.38,8780301.775,7428652.03,7063269.62,6802906.36,6345893.86,5578251.21,5136450.505,4126266.57,3947761.515,2770939.78,2579021.31,2516012.61,2054263.98,1750984.8,1598523.94,1570914.56,1437137.415,1359048.25,1272328.62,1211791.38,1209497.06,1206950.02,1069103.27,1047608.3,990592.29,935057.28,905758.65,904006.975,902093.81,887550.715,763851.31,729507.545,714439.705,697371.65,695500.775,675257.21,630555.775,616846.875,615825.315,559719.26,492093.6,466871,460632.48,442264.6,404151.01,397542.98,370889.34,359636.06,359017.74,298636.47,297453.26,295253.52,289597.625,262991.35,256244.35,242624.73,239852.695,233473.01,222168.19,221125.22,219382.35,217018.27,215335.555,198426.565,194135.355,187172.15,181068.92,176819.95,176577.49,174684.94,166810.245,162547.36,154797.7,152641.92,148209.255,145966.14,142566.07,138723.04,134257.55,129683.59,126896.345,126231.72,121831.69,121733.57,118847.02,118672.93,117099.4,112324.25,110817.78,106051.55,100038.94,99966.84,97625.45,97260.97,90380.695,85052.12,83613.945,83500.42,81480.545,81026.005,79168.325,78428.55,74918.83,72996.575,71892.05,71830.22,70807.06,68113.87,68032.19,66620.54,66574.75,64376.715,63609.62,62922.15,62027.82,59781.77,57305.4,57029.15,56861.38,56023.45,55580.315,54131.48,53949.83,52671.15,51935.545,51856.22,51234.23,50619.34,50128.49,49649.08,49318.85,48367.7,48212.94,47009.71,46771.19,44290.04,43300.385,42973.37,42559.905,42555.67,41718.66,40965.335,40821.3,38500.175,38366.97,38081.25,37733.8,36493.815,34821.42,34639.855,34458.29,32268.25,31234.65,30694.05,30620.23,30431.62,29484.24,28782.06,28653.06,28150.695,27979.995,27648.33,26871.86,25150.46,24619.93,23984.61,23971.16,23248.115,21234.68,19980.23,19482.87,18549.42,17095.985,16923.86,16905.78,16731.39,16014.735,15674.07,15652.375,15630.68,15298.08,15268.86,14917.945,14709.1,14673.485,14567.03,14241.33,13816.8,13737.01,13409.48,13213.65,13114.23,12906.99,12510.22,12423.11,12332.46,12241.81,12165.725,12057.5,12037.94,11217.22,11129.22,10462.16,10200.98,10153.87,9873.67,9777.215,9568.305,9353.45,8937.125,8928.3,8625.46,7252.5,6788.76,6723.49,6626.39,6484.38,6342.37,5613.565,5265.59,5227.825,3666.89,3511.685,3278.68,2298.83,1668.5,1649.705,1646.035,1623.57,1588.14,968.47,877.45,576.03,299.88,270.86,241.84,183.59,20.73],[18219321.08,18232502.25,17660570.39,18536648.88,14178395.46,13724485.65,12723022.37,11295225.46,10344731.23,18536648.88,18219321.08,18232502.25,17660570.39,8007847.28,14178395.46,13724485.65,12723022.37,11295225.46,10344731.23,5110453.77,8007847.28,3201610.89,2912641.8,5110453.77,18536648.88,1862145.43,18232502.25,3201610.89,2912641.8,17660570.39,13724485.65,11295225.46,1563136.96,18536648.88,18219321.08,10344731.23,1516574.99,1414762.67,5110453.77,1862145.43,1387343.27,18232502.25,12723022.37,17660570.39,1563136.96,1516574.99,13724485.65,11295225.46,1387343.27,1414762.67,18219321.08,10344731.23,5110453.77,8007847.28,14178395.46,679958.64,1516574.99,12723022.37,3201610.89,18536648.88,1387343.27,1414762.67,679958.64,2912641.8,8007847.28,1516574.99,14178395.46,1387343.27,1414762.67,445576.11,518586.7,322363.9,1563136.96,298948.94,3201610.89,518586.7,445576.11,273772.92,1414762.67,1563136.96,18232502.25,518586.7,2912641.8,18219321.08,445576.11,679958.64,518586.7,322363.9,298948.94,11295225.46,1563136.96,185984.98,273772.92,1387343.27,1516574.99,518586.7,679958.64,13724485.65,194099.75,8007847.28,172205.88,445576.11,193581.32,17660570.39,170613.08,230410.47,230410.47,679958.64,194099.75,230410.47,193581.32,172205.88,185984.98,5110453.77,94473.26,170613.08,175763.14,10344731.23,322363.9,298948.94,173374.49,273772.92,230410.47,175763.14,148720.96,193581.32,173374.49,3201610.89,445576.11,1862145.43,175763.14,173374.49,1862145.43,1862145.43,148720.96,173374.49,175763.14,14178395.46,172205.88,322363.9,194099.75,230410.47,173374.49,170613.08,107181.42,175763.14,193581.32,148720.96,273772.92,107181.42,94473.26,148720.96,65833.66,298948.94,148720.96,194099.75,2912641.8,72273.22,107181.42,170613.08,81317.65,81317.65,81317.65,63573,12723022.37,172205.88,193581.32,322363.9,107181.42,72273.22,185984.98,185984.98,65833.66,185984.98,194099.75,28442.53,170613.08,48316.06,63573,81317.65,107181.42,273772.92,72273.22,48316.06,72273.22,41588.78,18057.84,43158.69,43158.69,63573,63573,63573,43158.69,42742.88,42742.88,72273.22,41588.78,42742.88,65833.66,298948.94,42742.88,28442.53,43158.69,48316.06,42742.88,25478.98,41588.78,41588.78,41588.78,48316.06,65833.66,81317.65,48316.06,43158.69,20917.81,94473.26,172205.88,65833.66,94473.26,25478.98,94473.26,18057.84,12104.58,20917.81,10551.91,20917.81,7265.21,25478.98,25478.98,25478.98,12104.58,10551.91,20917.81,20917.81,7265.21,10551.91,12104.58,28442.53,10551.91,28442.53,28442.53,12104.58,18057.84,12104.58,18057.84,7265.21,7265.21,7265.21,18057.84,10551.91]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>state_2018<\/th>\n      <th>Avg_Brls<\/th>\n      <th>Std_Dev_Brls<\/th>\n      <th>Med_Brls<\/th>\n      <th>Qnt_Brls<\/th>\n      <th>Total_Brls<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>p1data %&gt;% summarize(Avg_Score = mean(sat_total_2018), Med_Score = median(sat_total_2018), 
+    Std_Dev_Score = sd(sat_total_2018), Min_Score = min(sat_total_2018), 
+    Max_Score = max(sat_total_2018)) %&gt;% datatable</code></pre>
+<div id="htmlwidget-2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"filter":"none","data":[["1"],[1122.88],[1098.5],[92.2204042119754],[998],[1298]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Avg_Score<\/th>\n      <th>Med_Score<\/th>\n      <th>Std_Dev_Score<\/th>\n      <th>Min_Score<\/th>\n      <th>Max_Score<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>p1data %&gt;% group_by(state_2018) %&gt;% select(state_2018, barrels, 
+    type, sat_total_2018) %&gt;% summarise(Minimum_Brls = min(barrels), 
+    Max_Brls = max(barrels), SATscore = max(sat_total_2018)) %&gt;% 
+    arrange(desc(SATscore)) %&gt;% datatable</code></pre>
+<div id="htmlwidget-3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],["Minnesota","Wisconsin","North Dakota","Iowa","Kansas","Missouri","Wyoming","Nebraska","Kentucky","South Dakota","Mississippi","Tennessee","Louisiana","Montana","Arkansas","Alabama","Arizona","Nevada","Massachusetts","Vermont","Oregon","Virginia","Alaska","Florida","Ohio","North Carolina","New Jersey","New Mexico","Pennsylvania","Washington","Maryland","California","Indiana","South Carolina","New York","Georgia","New Hampshire","Oklahoma","Connecticut","Texas","Colorado","Illinois","Rhode Island","Maine","Michigan","Hawaii","Utah","Idaho","West Virginia","Delaware"],[85052.12,71830.22,241.84,9353.45,6342.37,31234.65,11129.22,11217.22,27648.33,877.45,3666.89,54131.48,24619.93,40821.3,1623.57,9873.67,47009.71,12241.81,57305.4,19980.23,121831.69,118672.93,30620.23,138723.04,99966.84,181068.92,59781.77,21234.68,78428.55,121733.57,30431.62,359636.06,49318.85,14709.1,112324.25,51856.22,38366.97,183.59,26871.86,162547.36,176577.49,134257.55,15630.68,49649.08,126231.72,12037.94,10153.87,12906.99,20.73,13816.8],[442264.6,9225292.71,6723.49,74918.83,12510.22,11927936.41,16731.39,23984.61,129683.59,8928.3,10462.16,1750984.8,97625.45,63609.62,25150.46,41718.66,71892.05,16923.86,233473.01,187172.15,990592.29,12333484.1,100038.94,9944711.04,16201555.3,935057.28,2770939.78,48212.94,4126266.57,222168.19,221125.22,16122748.84,68032.19,38081.25,7428652.03,13665906.76,2579021.31,16905.78,117099.4,16987670.45,16457400.82,1209497.06,32268.25,97260.97,902093.81,34821.42,110817.78,15268.86,7252.5,217018.27],[1298,1294,1283,1265,1265,1262,1257,1252,1248,1240,1236,1231,1210,1198,1169,1166,1149,1140,1125,1120,1117,1117,1106,1099,1099,1098,1094,1093,1086,1081,1080,1076,1074,1070,1068,1064,1063,1062,1053,1032,1025,1019,1018,1013,1011,1010,1010,1001,999,998]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>state_2018<\/th>\n      <th>Minimum_Brls<\/th>\n      <th>Max_Brls<\/th>\n      <th>SATscore<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>p1data %&gt;% filter(type == &quot;On Premises&quot;) %&gt;% mutate(reading_prop = sat_read_write_2018/sat_total_2018, 
+    math_prop = sat_math_2018/sat_total_2018) %&gt;% arrange(desc(barrels)) %&gt;% 
+    datatable</code></pre>
+<div id="htmlwidget-4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],["California","North Carolina","Colorado","Texas","Florida","Illinois","Michigan","Oregon","Washington","Virginia","New York","Ohio","Minnesota","Pennsylvania","Iowa","Wisconsin","New Jersey","Massachusetts","Tennessee","Georgia","Maine","Indiana","Arizona","Alabama","Montana","New Hampshire","South Carolina","Missouri","Alaska","Maryland","Kentucky","Connecticut","Arkansas","Louisiana","Nebraska","New Mexico","Vermont","Nevada","Oklahoma","Rhode Island","Wyoming","Delaware","Idaho","Kansas","Hawaii","Mississippi","Utah","South Dakota","West Virginia","North Dakota"],[27,100,30,45,66,43,22,42,24,24,27,100,99,20,68,100,31,25,100,53,7,32,66,100,100,16,100,100,33,31,100,26,100,100,100,67,24,100,100,15,100,17,36,71,89,100,100,77,65,98],[22.7,19.1,23.9,20.7,19.9,23.9,24.2,21.3,22.2,23.9,24.5,20.3,21.3,23.5,21.8,20.5,23.7,25.5,19.6,21.4,24,22.5,19.2,19.1,20,25.1,18.3,20,20.8,22.5,20.2,25.6,19.4,19.2,20.1,19.4,24.1,17.7,19.3,24.2,20,23.8,22.3,21.6,18.9,18.6,20.4,21.9,20.3,20.3],[60,52,100,66,56,99,100,48,69,68,79,18,4,70,3,3,82,80,6,70,99,63,29,6,10,96,55,4,43,76,4,100,5,4,3,16,64,23,8,97,3,100,100,4,56,3,4,3,28,2],[540,554,519,520,550,513,511,564,543,567,534,552,643,547,634,641,547,562,624,542,512,542,577,595,606,535,547,633,562,545,630,535,592,615,629,552,565,574,541,513,633,505,508,633,480,630,480,622,513,640],[536,543,506,512,549,506,499,553,538,550,534,547,655,539,631,653,547,563,607,522,501,532,572,571,592,528,523,629,544,535,618,519,576,595,623,540,554,566,521,505,625,492,493,631,530,606,530,618,486,643],[1076,1098,1025,1032,1099,1019,1011,1117,1081,1117,1068,1099,1298,1086,1265,1294,1094,1125,1231,1064,1013,1074,1149,1166,1198,1063,1070,1262,1106,1080,1248,1053,1169,1210,1252,1093,1120,1140,1062,1018,1257,998,1001,1265,1010,1236,1010,1240,999,1283],[2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018],[359636.06,181068.92,176577.49,162547.36,138723.04,134257.55,126231.72,121831.69,121733.57,118672.93,112324.25,99966.84,85052.12,78428.55,74918.83,71830.22,59781.77,57305.4,57029.15,51856.22,49649.08,49318.85,47009.71,41718.66,40821.3,38366.97,38081.25,31234.65,30620.23,30431.62,27648.33,26871.86,25150.46,24619.93,23984.61,21234.68,19980.23,16923.86,16905.78,15674.07,15298.08,13816.8,12906.99,12510.22,12037.94,10462.16,10153.87,8928.3,7252.5,6723.49],["On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises","On Premises"],[0.50185873605948,0.504553734061931,0.506341463414634,0.503875968992248,0.500454959053685,0.503434739941119,0.505440158259149,0.504923903312444,0.502312673450509,0.507609668755595,0.5,0.502274795268426,0.49537750385208,0.503683241252302,0.501185770750988,0.495363214837713,0.5,0.499555555555556,0.506904955320877,0.509398496240602,0.50542941757157,0.504655493482309,0.502175805047868,0.510291595197256,0.50584307178631,0.503292568203198,0.511214953271028,0.501584786053883,0.508137432188065,0.50462962962963,0.504807692307692,0.508072174738841,0.506415739948674,0.508264462809917,0.502396166134185,0.505032021957914,0.504464285714286,0.503508771929825,0.509416195856874,0.503929273084479,0.503579952267303,0.506012024048096,0.507492507492508,0.500395256916996,0.475247524752475,0.509708737864078,0.475247524752475,0.501612903225806,0.513513513513513,0.498830865159782],[0.49814126394052,0.494535519125683,0.493658536585366,0.496124031007752,0.499545040946315,0.496565260058881,0.493570722057369,0.495076096687556,0.497687326549491,0.492390331244405,0.5,0.497725204731574,0.50462249614792,0.496316758747698,0.498814229249012,0.504636785162287,0.5,0.500444444444444,0.493095044679123,0.490601503759398,0.49457058242843,0.495344506517691,0.497824194952132,0.489708404802744,0.49415692821369,0.496707431796801,0.488785046728972,0.498415213946117,0.491862567811935,0.49537037037037,0.495192307692308,0.492877492877493,0.492728828058169,0.491735537190083,0.497603833865815,0.494053064958829,0.494642857142857,0.496491228070175,0.490583804143126,0.496070726915521,0.497215592680986,0.492985971943888,0.492507492507492,0.498814229249012,0.524752475247525,0.490291262135922,0.524752475247525,0.498387096774194,0.486486486486487,0.501169134840218]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>state_2018<\/th>\n      <th>act_participation_2018<\/th>\n      <th>act_composite_2018<\/th>\n      <th>sat_participation_2018<\/th>\n      <th>sat_read_write_2018<\/th>\n      <th>sat_math_2018<\/th>\n      <th>sat_total_2018<\/th>\n      <th>year<\/th>\n      <th>barrels<\/th>\n      <th>type<\/th>\n      <th>reading_prop<\/th>\n      <th>math_prop<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,11,12]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>p1data %&gt;% filter(type == &quot;Bottles and Cans&quot;) %&gt;% mutate(reading_prop = sat_read_write_2018/sat_total_2018, 
+    math_prop = sat_math_2018/sat_total_2018) %&gt;% arrange(desc(barrels)) %&gt;% 
+    datatable</code></pre>
+<div id="htmlwidget-5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],["Texas","Colorado","Ohio","California","Georgia","Virginia","Missouri","Florida","Wisconsin","New York","Pennsylvania","New Jersey","New Hampshire","Tennessee","Illinois","Oregon","North Carolina","Michigan","Minnesota","Massachusetts","Maryland","Delaware","Vermont","Washington","Kentucky","Connecticut","Utah","Alaska","Louisiana","Maine","Indiana","Montana","Arizona","New Mexico","Hawaii","Rhode Island","South Carolina","Idaho","Alabama","Nebraska","Nevada","Wyoming","Iowa","Mississippi","Kansas","Arkansas","South Dakota","North Dakota","Oklahoma","West Virginia"],[45,30,100,27,53,24,100,66,100,27,20,31,16,100,43,42,100,22,99,25,31,17,24,24,100,26,100,33,100,7,32,100,66,67,89,15,100,36,100,100,100,100,68,100,71,100,77,98,100,65],[20.7,23.9,20.3,22.7,21.4,23.9,20,19.9,20.5,24.5,23.5,23.7,25.1,19.6,23.9,21.3,19.1,24.2,21.3,25.5,22.5,23.8,24.1,22.2,20.2,25.6,20.4,20.8,19.2,24,22.5,20,19.2,19.4,18.9,24.2,18.3,22.3,19.1,20.1,17.7,20,21.8,18.6,21.6,19.4,21.9,20.3,19.3,20.3],[66,100,18,60,70,68,4,56,3,79,70,82,96,6,99,48,52,100,4,80,76,100,64,69,4,100,4,43,4,99,63,10,29,16,56,97,55,100,6,3,23,3,3,3,4,5,3,2,8,28],[520,519,552,540,542,567,633,550,641,534,547,547,535,624,513,564,554,511,643,562,545,505,565,543,630,535,480,562,615,512,542,606,577,552,480,513,547,508,595,629,574,633,634,630,633,592,622,640,541,513],[512,506,547,536,522,550,629,549,653,534,539,547,528,607,506,553,543,499,655,563,535,492,554,538,618,519,530,544,595,501,532,592,572,540,530,505,523,493,571,623,566,625,631,606,631,576,618,643,521,486],[1032,1025,1099,1076,1064,1117,1262,1099,1294,1068,1086,1094,1063,1231,1019,1117,1098,1011,1298,1125,1080,998,1120,1081,1248,1053,1010,1106,1210,1013,1074,1198,1149,1093,1010,1018,1070,1001,1166,1252,1140,1257,1265,1236,1265,1169,1240,1283,1062,999],[2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018],[16987670.45,16457400.82,16201555.3,16122748.84,13665906.76,12333484.1,11927936.41,9944711.04,9225292.71,7428652.03,4126266.57,2770939.78,2579021.31,1750984.8,1209497.06,990592.29,935057.28,902093.81,442264.6,233473.01,221125.22,217018.27,187172.15,174684.94,129683.59,117099.4,110817.78,100038.94,97625.45,83500.42,68032.19,63609.62,56861.38,48212.94,34458.29,32268.25,19482.87,14567.03,14241.33,13114.23,12241.81,11129.22,10200.98,6788.76,6626.39,1668.5,877.45,241.84,183.59,20.73],["Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans","Bottles and Cans"],[0.503875968992248,0.506341463414634,0.502274795268426,0.50185873605948,0.509398496240602,0.507609668755595,0.501584786053883,0.500454959053685,0.495363214837713,0.5,0.503683241252302,0.5,0.503292568203198,0.506904955320877,0.503434739941119,0.504923903312444,0.504553734061931,0.505440158259149,0.49537750385208,0.499555555555556,0.50462962962963,0.506012024048096,0.504464285714286,0.502312673450509,0.504807692307692,0.508072174738841,0.475247524752475,0.508137432188065,0.508264462809917,0.50542941757157,0.504655493482309,0.50584307178631,0.502175805047868,0.505032021957914,0.475247524752475,0.503929273084479,0.511214953271028,0.507492507492508,0.510291595197256,0.502396166134185,0.503508771929825,0.503579952267303,0.501185770750988,0.509708737864078,0.500395256916996,0.506415739948674,0.501612903225806,0.498830865159782,0.509416195856874,0.513513513513513],[0.496124031007752,0.493658536585366,0.497725204731574,0.49814126394052,0.490601503759398,0.492390331244405,0.498415213946117,0.499545040946315,0.504636785162287,0.5,0.496316758747698,0.5,0.496707431796801,0.493095044679123,0.496565260058881,0.495076096687556,0.494535519125683,0.493570722057369,0.50462249614792,0.500444444444444,0.49537037037037,0.492985971943888,0.494642857142857,0.497687326549491,0.495192307692308,0.492877492877493,0.524752475247525,0.491862567811935,0.491735537190083,0.49457058242843,0.495344506517691,0.49415692821369,0.497824194952132,0.494053064958829,0.524752475247525,0.496070726915521,0.488785046728972,0.492507492507492,0.489708404802744,0.497603833865815,0.496491228070175,0.497215592680986,0.498814229249012,0.490291262135922,0.498814229249012,0.492728828058169,0.498387096774194,0.501169134840218,0.490583804143126,0.486486486486487]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>state_2018<\/th>\n      <th>act_participation_2018<\/th>\n      <th>act_composite_2018<\/th>\n      <th>sat_participation_2018<\/th>\n      <th>sat_read_write_2018<\/th>\n      <th>sat_math_2018<\/th>\n      <th>sat_total_2018<\/th>\n      <th>year<\/th>\n      <th>barrels<\/th>\n      <th>type<\/th>\n      <th>reading_prop<\/th>\n      <th>math_prop<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,11,12]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>p1data %&gt;% filter(type == &quot;Kegs and Barrels&quot;) %&gt;% mutate(reading_prop = sat_read_write_2018/sat_total_2018, 
+    math_prop = sat_math_2018/sat_total_2018) %&gt;% arrange(desc(barrels)) %&gt;% 
+    datatable</code></pre>
+<div id="htmlwidget-6" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],["California","Colorado","Ohio","Virginia","Florida","Texas","Wisconsin","Pennsylvania","Missouri","New York","Georgia","Oregon","New Jersey","Michigan","North Carolina","New Hampshire","Washington","Illinois","Massachusetts","Minnesota","Maine","Arizona","Maryland","Delaware","Vermont","Alaska","Indiana","Tennessee","Utah","Connecticut","Louisiana","Montana","New Mexico","Hawaii","Kentucky","Wyoming","Rhode Island","Idaho","South Carolina","Nevada","Nebraska","Alabama","Iowa","Kansas","Mississippi","West Virginia","South Dakota","Arkansas","Oklahoma","North Dakota"],[27,30,100,24,66,45,100,20,100,27,53,42,31,22,100,16,24,43,25,99,7,66,31,17,24,33,32,100,100,26,100,100,67,89,100,100,15,36,100,100,100,100,68,71,100,65,77,100,100,98],[22.7,23.9,20.3,23.9,19.9,20.7,20.5,23.5,20,24.5,21.4,21.3,23.7,24.2,19.1,25.1,22.2,23.9,25.5,21.3,24,19.2,22.5,23.8,24.1,20.8,22.5,19.6,20.4,25.6,19.2,20,19.4,18.9,20.2,20,24.2,22.3,18.3,17.7,20.1,19.1,21.8,21.6,18.6,20.3,21.9,19.4,19.3,20.3],[60,100,18,68,56,66,3,70,4,79,70,48,82,100,52,96,69,99,80,4,99,29,76,100,64,43,63,6,4,100,4,10,16,56,4,3,97,100,55,23,3,6,3,4,3,28,3,5,8,2],[540,519,552,567,550,520,641,547,633,534,542,564,547,511,554,535,543,513,562,643,512,577,545,505,565,562,542,624,480,535,615,606,552,480,630,633,513,508,547,574,629,595,634,633,630,513,622,592,541,640],[536,506,547,550,549,512,653,539,629,534,522,553,547,499,543,528,538,506,563,655,501,572,535,492,554,544,532,607,530,519,595,592,540,530,618,625,505,493,523,566,623,571,631,631,606,486,618,576,521,643],[1076,1025,1099,1117,1099,1032,1294,1086,1262,1068,1064,1117,1094,1011,1098,1063,1081,1019,1125,1298,1013,1149,1080,998,1120,1106,1074,1231,1010,1053,1210,1198,1093,1010,1248,1257,1018,1001,1070,1140,1252,1166,1265,1265,1236,999,1240,1169,1062,1283],[2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018,2018],[2054263.98,1598523.94,1359048.25,1272328.62,1211791.38,1069103.27,1047608.3,905758.65,763851.31,466871,460632.48,404151.01,370889.34,359017.74,298636.47,295253.52,222168.19,219382.35,154797.7,152641.92,97260.97,71892.05,70807.06,68113.87,66620.54,62922.15,56023.45,54131.48,51234.23,50128.49,48367.7,44290.04,37733.8,34821.42,28653.06,16731.39,15630.68,15268.86,14709.1,12423.11,11217.22,9873.67,9353.45,6342.37,3666.89,3278.68,2298.83,1623.57,968.47,299.88],["Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels","Kegs and Barrels"],[0.50185873605948,0.506341463414634,0.502274795268426,0.507609668755595,0.500454959053685,0.503875968992248,0.495363214837713,0.503683241252302,0.501584786053883,0.5,0.509398496240602,0.504923903312444,0.5,0.505440158259149,0.504553734061931,0.503292568203198,0.502312673450509,0.503434739941119,0.499555555555556,0.49537750385208,0.50542941757157,0.502175805047868,0.50462962962963,0.506012024048096,0.504464285714286,0.508137432188065,0.504655493482309,0.506904955320877,0.475247524752475,0.508072174738841,0.508264462809917,0.50584307178631,0.505032021957914,0.475247524752475,0.504807692307692,0.503579952267303,0.503929273084479,0.507492507492508,0.511214953271028,0.503508771929825,0.502396166134185,0.510291595197256,0.501185770750988,0.500395256916996,0.509708737864078,0.513513513513513,0.501612903225806,0.506415739948674,0.509416195856874,0.498830865159782],[0.49814126394052,0.493658536585366,0.497725204731574,0.492390331244405,0.499545040946315,0.496124031007752,0.504636785162287,0.496316758747698,0.498415213946117,0.5,0.490601503759398,0.495076096687556,0.5,0.493570722057369,0.494535519125683,0.496707431796801,0.497687326549491,0.496565260058881,0.500444444444444,0.50462249614792,0.49457058242843,0.497824194952132,0.49537037037037,0.492985971943888,0.494642857142857,0.491862567811935,0.495344506517691,0.493095044679123,0.524752475247525,0.492877492877493,0.491735537190083,0.49415692821369,0.494053064958829,0.524752475247525,0.495192307692308,0.497215592680986,0.496070726915521,0.492507492507492,0.488785046728972,0.496491228070175,0.497603833865815,0.489708404802744,0.498814229249012,0.498814229249012,0.490291262135922,0.486486486486487,0.498387096774194,0.492728828058169,0.490583804143126,0.501169134840218]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>state_2018<\/th>\n      <th>act_participation_2018<\/th>\n      <th>act_composite_2018<\/th>\n      <th>sat_participation_2018<\/th>\n      <th>sat_read_write_2018<\/th>\n      <th>sat_math_2018<\/th>\n      <th>sat_total_2018<\/th>\n      <th>year<\/th>\n      <th>barrels<\/th>\n      <th>type<\/th>\n      <th>reading_prop<\/th>\n      <th>math_prop<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5,6,7,8,9,11,12]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>p1datatb &lt;- p1data %&gt;% group_by(state_2018) %&gt;% mutate(total_barrels = sum(barrels))
+
+p1datawd &lt;- p1data %&gt;% pivot_wider(names_from = type, values_from = barrels)
+p1datawd %&gt;% glimpse</code></pre>
+<pre><code>## Rows: 50
+## Columns: 11
+## $ state_2018             &lt;chr&gt; &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Arizona&quot;, &quot;Arkansas&quot;, &quot;C…
+## $ act_participation_2018 &lt;dbl&gt; 100, 33, 66, 100, 27, 30, 26, 17, 66, 53, 89, …
+## $ act_composite_2018     &lt;dbl&gt; 19.1, 20.8, 19.2, 19.4, 22.7, 23.9, 25.6, 23.8…
+## $ sat_participation_2018 &lt;dbl&gt; 6, 43, 29, 5, 60, 100, 100, 100, 56, 70, 56, 1…
+## $ sat_read_write_2018    &lt;dbl&gt; 595, 562, 577, 592, 540, 519, 535, 505, 550, 5…
+## $ sat_math_2018          &lt;dbl&gt; 571, 544, 572, 576, 536, 506, 519, 492, 549, 5…
+## $ sat_total_2018         &lt;dbl&gt; 1166, 1106, 1149, 1169, 1076, 1025, 1053, 998,…
+## $ year                   &lt;dbl&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018…
+## $ `On Premises`          &lt;dbl&gt; 41718.66, 30620.23, 47009.71, 25150.46, 359636…
+## $ `Bottles and Cans`     &lt;dbl&gt; 14241.33, 100038.94, 56861.38, 1668.50, 161227…
+## $ `Kegs and Barrels`     &lt;dbl&gt; 9873.67, 62922.15, 71892.05, 1623.57, 2054263.…</code></pre>
+<pre class="r"><code>p1datawd %&gt;% select(-year) %&gt;% select_if(is.numeric) %&gt;% scale %&gt;% 
+    cor</code></pre>
+<pre><code>##                        act_participation_2018 act_composite_2018
+## act_participation_2018              1.0000000         -0.8613623
+## act_composite_2018                 -0.8613623          1.0000000
+## sat_participation_2018             -0.8662045          0.7553042
+## sat_read_write_2018                 0.5852682         -0.3882969
+## sat_math_2018                       0.6271002         -0.3915104
+## sat_total_2018                      0.6134660         -0.3948742
+## On Premises                        -0.2863932          0.2201666
+## Bottles and Cans                   -0.1333546          0.1177018
+## Kegs and Barrels                   -0.2245634          0.1974418
+##                        sat_participation_2018 sat_read_write_2018 sat_math_2018
+## act_participation_2018             -0.8662045           0.5852682     0.6271002
+## act_composite_2018                  0.7553042          -0.3882969    -0.3915104
+## sat_participation_2018              1.0000000          -0.7535198    -0.7836654
+## sat_read_write_2018                -0.7535198           1.0000000     0.9528826
+## sat_math_2018                      -0.7836654           0.9528826     1.0000000
+## sat_total_2018                     -0.7780447           0.9881856     0.9880956
+## On Premises                         0.3082923          -0.2067518    -0.2077875
+## Bottles and Cans                    0.1652704          -0.1224245    -0.1207757
+## Kegs and Barrels                    0.2218983          -0.1507044    -0.1347878
+##                        sat_total_2018 On Premises Bottles and Cans
+## act_participation_2018      0.6134660  -0.2863932       -0.1333546
+## act_composite_2018         -0.3948742   0.2201666        0.1177018
+## sat_participation_2018     -0.7780447   0.3082923        0.1652704
+## sat_read_write_2018         0.9881856  -0.2067518       -0.1224245
+## sat_math_2018               0.9880956  -0.2077875       -0.1207757
+## sat_total_2018              1.0000000  -0.2096846       -0.1236286
+## On Premises                -0.2096846   1.0000000        0.6286540
+## Bottles and Cans           -0.1236286   0.6286540        1.0000000
+## Kegs and Barrels           -0.1448769   0.7835465        0.9110964
+##                        Kegs and Barrels
+## act_participation_2018       -0.2245634
+## act_composite_2018            0.1974418
+## sat_participation_2018        0.2218983
+## sat_read_write_2018          -0.1507044
+## sat_math_2018                -0.1347878
+## sat_total_2018               -0.1448769
+## On Premises                   0.7835465
+## Bottles and Cans              0.9110964
+## Kegs and Barrels              1.0000000</code></pre>
+<pre class="r"><code>p1datawd %&gt;% pivot_longer(9:11, names_to = &quot;Production&quot;, values_to = &quot;Barrels Produced&quot;, 
+    values_drop_na = T) %&gt;% glimpse</code></pre>
+<pre><code>## Rows: 150
+## Columns: 10
+## $ state_2018             &lt;chr&gt; &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Al…
+## $ act_participation_2018 &lt;dbl&gt; 100, 100, 100, 33, 33, 33, 66, 66, 66, 100, 10…
+## $ act_composite_2018     &lt;dbl&gt; 19.1, 19.1, 19.1, 20.8, 20.8, 20.8, 19.2, 19.2…
+## $ sat_participation_2018 &lt;dbl&gt; 6, 6, 6, 43, 43, 43, 29, 29, 29, 5, 5, 5, 60, …
+## $ sat_read_write_2018    &lt;dbl&gt; 595, 595, 595, 562, 562, 562, 577, 577, 577, 5…
+## $ sat_math_2018          &lt;dbl&gt; 571, 571, 571, 544, 544, 544, 572, 572, 572, 5…
+## $ sat_total_2018         &lt;dbl&gt; 1166, 1166, 1166, 1106, 1106, 1106, 1149, 1149…
+## $ year                   &lt;dbl&gt; 2018, 2018, 2018, 2018, 2018, 2018, 2018, 2018…
+## $ Production             &lt;chr&gt; &quot;On Premises&quot;, &quot;Bottles and Cans&quot;, &quot;Kegs and B…
+## $ `Barrels Produced`     &lt;dbl&gt; 41718.66, 14241.33, 9873.67, 30620.23, 100038.…</code></pre>
+<p><em>In the barrels data the mean, standard deviation, median, quantile and sum of all barrels for the three types of production methods were measured for each state and arranged by descending quantile.By looking at the top six states California was the lead producer while still not being in the highest quantile with Texas, Colorado, and Ohio above it even with less barrels produced and lower values for mean, median, and total sum.Next statistics were take for SAT scores with the mean at 1122.88, median at 1098.5, standard deviation of 92.22, minimum of 998 and maximum of 1298 points. When arranged by descending SAT scores and bringing up the maxium and minimum barrels produced from each type of production, Minnesota scored the highest in SAT score with a low maxium barrels produced. There is high variance in the number of barrels produced in the top six states compared to the ranking in SAT scores. </em></p>
+<p><em>In the next three tables the proportion of writing and read scores to the total and the proportion of math scores were evalutated and arranged in descending order of barrels according to the type of production used. There proportions were roughly the same for each state and did not seem to correspond to the type of production, On Premises, Kegs and Barrels, or Bottles and Cans. When evaluating the correlations between each variable, Bottles and Cans seemed to have the least effect on SAT scores and On Premsises had the highest correlation on SAT participation with a value of 0.308. and a correlation of -.209 for total SAT score. There seems to be little correlation between barrel production and SAT performance.</em></p>
+</div>
+<div id="visualizing-30-pts" class="section level4">
+<h4>4. Visualizing (30 pts)</h4>
+<ul>
+<li><p>Create a correlation heatmap of your numeric variables</p></li>
+<li><p>Create two effective, polished plots with ggplot</p>
+<ul>
+<li>Each plot should map 3+ variables to aesthetics</li>
+<li>Each plot should have a title and clean labeling for all mappings</li>
+<li>Change at least one default theme element and color for at least one mapping per plot</li>
+<li>For at least one plot, add more tick marks (x, y, or both) than are given by default</li>
+<li>For at least one plot, use the stat=&quot;summary&quot; function</li>
+<li>Supporting paragraph or two (for each plot) describing the relationships/trends that are apparent</li>
+</ul></li>
+</ul>
+<pre class="r"><code># just fill it out
+p1df &lt;- p1datawd %&gt;% select(-year) %&gt;% select_if(is.numeric) %&gt;% 
+    na.omit
+cormatp1 &lt;- p1df %&gt;% cor
+p1cor &lt;- cormatp1 %&gt;% as.data.frame %&gt;% rownames_to_column(&quot;p1var1&quot;) %&gt;% 
+    pivot_longer(-1, names_to = &quot;p1var2&quot;, values_to = &quot;correlation&quot;)
+
+p1cor %&gt;% ggplot(aes(p1var1, p1var2, fill = correlation)) + geom_tile() + 
+    scale_fill_gradient2(low = &quot;red&quot;, mid = &quot;white&quot;, high = &quot;blue&quot;) + 
+    geom_text(aes(label = round(correlation, 2)), color = &quot;black&quot;, 
+        size = 4) + theme(axis.text.x = element_text(angle = 90, 
+    hjust = 1)) + coord_fixed()</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p1data %&gt;% mutate(scbar = scale(barrels)) %&gt;% ggplot(aes(x = scbar, 
+    y = sat_total_2018, color = type)) + geom_point(stat = &quot;summary&quot;) + 
+    ylab(&quot;SAT Score&quot;) + xlab(&quot;Barrels&quot;) + ggtitle(&quot;Measure of Barrels and SAT Scores by Type&quot;) + 
+    scale_x_continuous(breaks = seq(-1, 5, 0.5)) + geom_smooth(method = &quot;lm&quot;)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>p1data %&gt;% ggplot(aes(x = state_2018, y = sat_total_2018, color = type)) + 
+    geom_bar(stat = &quot;summary&quot;) + ylab(&quot;Barrels Produced&quot;) + xlab(&quot;State&quot;) + 
+    ggtitle(&quot;Measure of Barrels over SAT Scores&quot;) + coord_flip()</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;" /> <em>In the correlation heat map when comparing the type of prodcution with SAT total scores and SAT participation, on premises production has the strongest correlation. The positve correlation is weak with 0.21 for score and .31 for particpation, but is greater than kegs and barrels at .14 and .22 and greater than bottles and cans at .12 for both variables. </em></p>
+<p><em>After scaling for barrels I ploted SAT scores over produced barrels for each state by type to visualize any correlations. With this plot there seems to be a weak negative correlation between bottle and can production with SAT scores which does not match the correlation heat map above.On premise production has no correlation with all points bunched together and kegs and barrels has no correlation as well though it is a little more spread out than barrels produced on premises.</em></p>
+<p><em>With the same scaled data from the scatter plot I created a bar graph of barrels produced for each state by type to visualize total production for each state. Production of barrels that are bottled and canned vastly outnumber both on premise production and keg and barrel production. This may explain why there seems to be more correlation with bottle and can production compared to the other types on the scatter plot above. Though this does not explain why bottles and cans have less correlation according to the heatmat where the other types have slightly stronger correlations. </em> #### 5. Dimensionality Reduction (20 pts)</p>
+<ul>
+<li><p>Either k-means/PAM clustering or PCA (inclusive &quot;or&quot;) should be performed on at least three numeric variables in your dataset</p>
+<ul>
+<li>All relevant steps discussed in class</li>
+<li>A visualization of the clusters or the first few principal components (using ggplot2)</li>
+<li>Supporting paragraph or two describing results found</li>
+</ul></li>
+</ul>
+<pre class="r"><code>library(cluster)
+# Scores and Barrels
+p1clust_dat1 &lt;- p1data %&gt;% dplyr::select(sat_total_2018, barrels, 
+    type)
+
+wssp1 &lt;- vector()
+for (i in 1:10) {
+    kmsp1 &lt;- p1clust_dat1 %&gt;% dplyr::select(sat_total_2018, barrels) %&gt;% 
+        kmeans(., i + 1)
+    wssp1[i] &lt;- kmsp1$tot.withinss
+}
+ggplot() + geom_point(aes(x = 1:10, y = wssp1)) + geom_path(aes(x = 1:10, 
+    y = wssp1)) + xlab(&quot;clusters&quot;) + scale_x_continuous(breaks = 1:10)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>kmeansp11 &lt;- p1clust_dat1 %&gt;% select(-type) %&gt;% kmeans(2)
+kmeansclustp11 &lt;- p1clust_dat1 %&gt;% mutate(p11cluster = as.factor(kmeansp11$cluster))
+
+kmeansclustp11 %&gt;% ggplot(aes(x = sat_total_2018, y = barrels, 
+    shape = type, color = p11cluster)) + geom_point() + scale_fill_brewer(palette = &quot;Spectral&quot;)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Participation and Barrels
+p1clust_dat2 &lt;- p1data %&gt;% dplyr::select(sat_participation_2018, 
+    barrels, type)
+wssp12 &lt;- vector()
+for (i in 1:10) {
+    kmsp12 &lt;- p1clust_dat2 %&gt;% dplyr::select(sat_participation_2018, 
+        barrels) %&gt;% kmeans(., i + 1)
+    wssp12[i] &lt;- kmsp12$tot.withinss
+}
+ggplot() + geom_point(aes(x = 1:10, y = wssp12)) + geom_path(aes(x = 1:10, 
+    y = wssp12)) + xlab(&quot;clusters&quot;) + scale_x_continuous(breaks = 1:10)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-5-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>kmeansp12 &lt;- p1clust_dat2 %&gt;% select(-type) %&gt;% kmeans(2)
+kmeansclustp12 &lt;- p1clust_dat2 %&gt;% mutate(p12cluster = as.factor(kmeansp12$cluster))
+
+kmeansclustp12 %&gt;% ggplot(aes(sat_participation_2018, barrels, 
+    shape = type, color = p12cluster)) + geom_point() + scale_fill_brewer(palette = &quot;Spectral&quot;)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-5-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Scores, Participation, and Barrels
+p1clust_dat3 &lt;- p1data %&gt;% dplyr::select(sat_total_2018, barrels, 
+    sat_participation_2018, type)
+
+wssp13 &lt;- vector()
+for (i in 1:10) {
+    kmsp13 &lt;- p1clust_dat3 %&gt;% dplyr::select(sat_total_2018, 
+        barrels, sat_participation_2018) %&gt;% kmeans(., i + 1)
+    wssp13[i] &lt;- kmsp13$tot.withinss
+}
+ggplot() + geom_point(aes(x = 1:10, y = wssp13)) + geom_path(aes(x = 1:10, 
+    y = wssp13)) + xlab(&quot;clusters&quot;) + scale_x_continuous(breaks = 1:10)</code></pre>
+<p><img src="../../project/project1_files/figure-html/unnamed-chunk-5-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>kmeansp13 &lt;- p1clust_dat3 %&gt;% select(-type) %&gt;% kmeans(2)
+kmeansclustp13 &lt;- p1clust_dat3 %&gt;% mutate(p13cluster = as.factor(kmeansp13$cluster))
+
+library(plotly)
+kmeansclustp13 %&gt;% plot_ly(x = ~sat_total_2018, y = ~sat_participation_2018, 
+    z = ~barrels, color = ~kmeansp13$cluster, type = &quot;scatter3d&quot;, 
+    mode = &quot;markers&quot;, symbol = ~type, symbols = c(&quot;circle&quot;, &quot;triangle&quot;, 
+        &quot;o&quot;)) %&gt;% layout(autosize = T)</code></pre>
+<p><div id="htmlwidget-7" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7">{"x":{"visdat":{"12753124572c0":["function () ","plotlyVisDat"]},"cur_data":"12753124572c0","attrs":{"12753124572c0":{"x":{},"y":{},"z":{},"mode":"markers","color":{},"symbol":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"symbols":["circle","triangle","o"],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"autosize":true,"scene":{"xaxis":{"title":"sat_total_2018"},"yaxis":{"title":"sat_participation_2018"},"zaxis":{"title":"barrels"}},"hovermode":"closest","showlegend":true,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[1166,1106,1149,1169,1076,1025,1053,998,1099,1064,1010,1001,1019,1074,1265,1265,1248,1210,1013,1080,1125,1011,1298,1236,1262,1198,1252,1140,1063,1094,1093,1068,1098,1283,1099,1062,1117,1086,1018,1070,1240,1231,1032,1010,1120,1117,1081,999,1294,1257],"y":[6,43,29,5,60,100,100,100,56,70,56,100,99,63,3,4,4,4,99,76,80,100,4,3,4,10,3,23,96,82,16,79,52,2,18,8,48,70,97,55,3,6,66,4,64,68,69,28,3,3],"z":[14241.33,100038.94,56861.38,1668.5,16122748.84,16457400.82,117099.4,217018.27,9944711.04,13665906.76,34458.29,14567.03,1209497.06,68032.19,10200.98,6626.39,129683.59,97625.45,83500.42,221125.22,233473.01,902093.81,442264.6,6788.76,11927936.41,63609.62,13114.23,12241.81,2579021.31,2770939.78,48212.94,7428652.03,935057.28,241.84,16201555.3,183.59,990592.29,4126266.57,32268.25,19482.87,877.45,1750984.8,16987670.45,110817.78,187172.15,12333484.1,174684.94,20.73,9225292.71,11129.22],"mode":"markers","type":"scatter3d","name":"Bottles and Cans","marker":{"colorbar":{"title":"kmeansp13$cluster","ticklen":2},"cmin":1,"cmax":2,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[1,1,1,1,2,2,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,2,1,1,2,1,1,2,1],"symbol":"circle","line":{"colorbar":{"title":"","ticklen":2},"cmin":1,"cmax":2,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":false,"color":[1,1,1,1,2,2,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,2,1,1,2,1,1,2,1]}},"frame":null},{"x":[1166,1106,1149,1169,1076,1025,1053,998,1099,1064,1010,1001,1019,1074,1265,1265,1248,1210,1013,1080,1125,1011,1298,1236,1262,1198,1252,1140,1063,1094,1093,1068,1098,1283,1099,1062,1117,1086,1018,1070,1240,1231,1032,1010,1120,1117,1081,999,1294,1257],"y":[6,43,29,5,60,100,100,100,56,70,56,100,99,63,3,4,4,4,99,76,80,100,4,3,4,10,3,23,96,82,16,79,52,2,18,8,48,70,97,55,3,6,66,4,64,68,69,28,3,3],"z":[9873.67,62922.15,71892.05,1623.57,2054263.98,1598523.94,50128.49,68113.87,1211791.38,460632.48,34821.42,15268.86,219382.35,56023.45,9353.45,6342.37,28653.06,48367.7,97260.97,70807.06,154797.7,359017.74,152641.92,3666.89,763851.31,44290.04,11217.22,12423.11,295253.52,370889.34,37733.8,466871,298636.47,299.88,1359048.25,968.47,404151.01,905758.65,15630.68,14709.1,2298.83,54131.48,1069103.27,51234.23,66620.54,1272328.62,222168.19,3278.68,1047608.3,16731.39],"mode":"markers","type":"scatter3d","name":"Kegs and Barrels","marker":{"color":"rgba(68,1,84,1)","symbol":"triangle","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"frame":null},{"x":[1166,1106,1149,1169,1076,1025,1053,998,1099,1064,1010,1001,1019,1074,1265,1265,1248,1210,1013,1080,1125,1011,1298,1236,1262,1198,1252,1140,1063,1094,1093,1068,1098,1283,1099,1062,1117,1086,1018,1070,1240,1231,1032,1010,1120,1117,1081,999,1294,1257],"y":[6,43,29,5,60,100,100,100,56,70,56,100,99,63,3,4,4,4,99,76,80,100,4,3,4,10,3,23,96,82,16,79,52,2,18,8,48,70,97,55,3,6,66,4,64,68,69,28,3,3],"z":[41718.66,30620.23,47009.71,25150.46,359636.06,176577.49,26871.86,13816.8,138723.04,51856.22,12037.94,12906.99,134257.55,49318.85,74918.83,12510.22,27648.33,24619.93,49649.08,30431.62,57305.4,126231.72,85052.12,10462.16,31234.65,40821.3,23984.61,16923.86,38366.97,59781.77,21234.68,112324.25,181068.92,6723.49,99966.84,16905.78,121831.69,78428.55,15674.07,38081.25,8928.3,57029.15,162547.36,10153.87,19980.23,118672.93,121733.57,7252.5,71830.22,15298.08],"mode":"markers","type":"scatter3d","name":"On Premises","marker":{"color":"rgba(68,1,84,1)","symbol":"circle-open","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"frame":null},{"x":[998,1298],"y":[2,100],"type":"scatter3d","mode":"markers","opacity":0,"hoverinfo":"none","showlegend":false,"marker":{"colorbar":{"title":"kmeansp13$cluster","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"cmin":1,"cmax":2,"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666667","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"color":[1,2],"line":{"color":"rgba(214,39,40,1)"}},"z":[20.73,16987670.45],"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script> <em>First I selected the relevent data for each k means clustering where p1clust_dat1 was SAT scores, barrels produced, and production type and for p1clust_dat2 it was SAT particpation, barrels produced, and production type. After this I graphed the silhouette for both data sets by creating a vector from the numeric varibles and calcualting the kmeans for each data set. After this I graphed it and saw that it looked like the k was 2 for both graphs so I saved the k means for each set and then saved the total withins. Afer this I plotted it with ggplot to visualize the clusters for both data sets.</em></p>
+<p><em>Both graphs had two clusters where a majority of the observations were in the lower cluster and the higher cluster consisted of bottles and cans type of production and were distinctly seperate from the first cluster. Both graphs for participation and scores are consistant with each other in their cluster placements. It appears that the second cluster consists of the outliers in high barrel production. By observing the types prodcution for cluster 1, on premises was the lowest with kegs slightly higher. A few bottles and cans were in cluster 1 but a majority of them seem to define cluster 2. The graphs differ where for SAT scores obsevations remained on the lower side under 1150 and in participation the observations leaned on the higher side over 50. The highest means of production in cluster 2 followed this trend but there does not seem to create a defined third cluster. I created the seperate graphs and the 3D graph for different ways to visualize the same data where for the three numeric variables I used SAT scores, participation, barrels produced, and type of production with the same process as the first two kmeans calculations and used the plotly package to create the 3D graph. The 3D graph was used to show all three numeric varialbles at the same time.</em></p>
+<p>**</p>
+</div>
+<div id="neatness" class="section level4">
+<h4>6. Neatness!</h4>
+<ul>
+<li>Your project should not knit to more than 30 or so pages (probably closer to 10)! You will lose points if you print out your entire dataset(s), have terrible formatting, etc. If you start your project in a fresh .Rmd file, you are advised to paste the set-up code from this document (lines 14-17) at the top of it: this will automatically truncate if you accidentally print out a huge dataset, etc. Imagine this is a polished report you are giving to your PI or boss to summarize your work researching a topic.</li>
+</ul>
+<p>...</p>
+</div>
+</div>
+</div>
+
+            
+        <hr>         <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div> 
+            </div>
+          </div>
+
+   <hr>  <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div> 
+        </div>
+      </div>
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../../js/docs.min.js"></script>
+<script src="../../js/main.js"></script>
+
+<script src="../../js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>
