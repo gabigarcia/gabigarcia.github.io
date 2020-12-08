@@ -11,20 +11,33 @@ description: ''
 
 Just playing around with code
 
-##Examples
+##Reticulate lets R and Python interact
+
+Set Up
+```{r setup, include= FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages('reticulate')
+library(reticulate)
+```
+
+
+Python
+```{python}
+import seaborn as sns
+
+df= sns.load_dataset('diamonds') 
+```
+
 
 R
 ```{r}
-hist(quakes$depth)
+library(ggplot2)
+qplot(py$df$price,py$df$carat)
 ```
 
 
-python
-```{python}
-string= "Hello world!"
 
-print(string,string)
-```
+
 
 ##Now here's some links
 

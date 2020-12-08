@@ -77,16 +77,17 @@
 <div id="heres-a-cute-little-post" class="section level1">
 <h1>Here's a cute little post</h1>
 <p>Just playing around with code</p>
-<div id="examples" class="section level2">
-<h2>Examples</h2>
-<p>R</p>
-<pre class="r"><code>hist(quakes$depth)</code></pre>
-<p><img src="../../../../../post/2020-12-04-a-little-post_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>python</p>
-<pre class="python"><code>string= &quot;Hello world!&quot;
+<div id="reticulate-lets-r-and-python-interact" class="section level2">
+<h2>Reticulate lets R and Python interact</h2>
+<p>Set Up</p>
+<p>Python</p>
+<pre class="python"><code>import seaborn as sns
 
-print(string,string)</code></pre>
-<pre><code>## Hello world! Hello world!</code></pre>
+df= sns.load_dataset(&#39;diamonds&#39;) </code></pre>
+<p>R</p>
+<pre class="r"><code>library(ggplot2)
+qplot(py$df$price,py$df$carat)</code></pre>
+<p><img src="../../../../../post/2020-12-04-a-little-post_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="now-heres-some-links" class="section level2">
 <h2>Now here's some links</h2>
