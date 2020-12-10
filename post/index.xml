@@ -14,23 +14,11 @@
       
       <guid>/post/2020/12/04/a-little-post/</guid>
       <description>  Here&#39;s a cute little post Just playing around with code
-Reticulate lets R and Python interact Set Up
-Python
+Reticulate lets R and Python interact Python
 import seaborn as sns df= sns.load_dataset(&amp;#39;diamonds&amp;#39;)  R
 library(ggplot2) qplot(py$df$price,py$df$carat)  Now here&#39;s some links Link to project 1
 Link to google
  Now a GIF    </description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015/07/23/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015/07/23/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.</description>
     </item>
     
   </channel>

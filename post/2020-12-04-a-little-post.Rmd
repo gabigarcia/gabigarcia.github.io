@@ -13,7 +13,6 @@ Just playing around with code
 
 ##Reticulate lets R and Python interact
 
-Set Up
 ```{r setup, include= FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 #install.packages('reticulate')
@@ -41,7 +40,7 @@ qplot(py$df$price,py$df$carat)
 
 ##Now here's some links
 
-[Link to project 1](projects/project1/)
+[Link to project 1](/project/project1/)
 
 [Link to google](https://www.google.com)
 
